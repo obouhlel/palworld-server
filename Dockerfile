@@ -3,9 +3,6 @@
 # Set the base image
 FROM debian:12-slim
 
-# # Set environment variables
-# ENV USER root
-# ENV HOME /root
 # Create a new user 'steam'
 RUN useradd -m steam
 
@@ -42,11 +39,11 @@ RUN ln -s /usr/games/steamcmd /usr/bin/steamcmd
 RUN steamcmd +quit
 
 # Fix missing directories and libraries
-RUN mkdir -p $HOME/.steam \
- && ln -s $HOME/.local/share/Steam/steamcmd/linux32 $HOME/.steam/sdk32 \
- && ln -s $HOME/.local/share/Steam/steamcmd/linux64 $HOME/.steam/sdk64 \
- && ln -s $HOME/.steam/sdk32/steamclient.so $HOME/.steam/sdk32/steamservice.so \
- && ln -s $HOME/.steam/sdk64/steamclient.so $HOME/.steam/sdk64/steamservice.so
+RUN mkdir -p $HOME/steamcmd \
+ && ln -s $HOME/.local/share/Steam/steamcmd/linux32 $HOME/steamcmd/sdk32 \
+ && ln -s $HOME/.local/share/Steam/steamcmd/linux64 $HOME/steamcmd/sdk64 \
+ && ln -s $HOME/steamcmd/sdk32/steamclient.so $HOME/steamcmd/sdk32/steamservice.so \
+ && ln -s $HOME/steamcmd/sdk64/steamclient.so $HOME/steamcmd/sdk64/steamservice.so
 
 # Install PalWorld
 RUN steamcmd +login anonymous +app_update 2394010 validate +quit
@@ -55,12 +52,12 @@ RUN steamcmd +login anonymous +app_update 2394010 validate +quit
 RUN chown -R $USER:$USER $HOME
 
 # Copy the configuration files
-COPY PalWorldSettings.ini /home/steam/.steam/steam/steamapps/common/PalServer/Pal/Saved/Config/LinuxServer/PalWorldSettings.ini
+COPY PalWorldSettings.ini /home/steam/steamcmd/steam/steamapps/common/PalServer/Pal/Saved/Config/LinuxServer/PalWorldSettings.ini
 
 # Switch to the new user
 USER $USER
 
-WORKDIR /home/steam/.steam/steam/steamapps/common/PalServer
+WORKDIR /home/steam/steamcmd/steam/steamapps/common/PalServer
 
 EXPOSE 8211/udp
 
