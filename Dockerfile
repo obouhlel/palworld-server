@@ -1,7 +1,7 @@
 ######## INSTALL ########
 
 # Set the base image
-FROM debian:12-slim
+FROM debian:bullseye-slim
 
 # # Set environment variables
 # ENV USER root
