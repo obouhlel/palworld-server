@@ -24,7 +24,6 @@ COPY sources.list /etc/apt/sources.list
 RUN dpkg --add-architecture i386 \
  && apt-get update -y \
  && apt-get upgrade -y \
- && apt-get install curl -y \
  && apt-get install -y --no-install-recommends ca-certificates locales steamcmd \
  && rm -rf /var/lib/apt/lists/*
 
@@ -61,10 +60,6 @@ USER $USER
 WORKDIR /home/steam/.steam/steam/steamapps/common/PalServer
 
 EXPOSE 8211/udp
-
-EXPOSE 8212/tcp
-
-EXPOSE 25575/tcp
 
 ENTRYPOINT ["sh"]
 CMD ["PalServer.sh", "-publiclobby"]

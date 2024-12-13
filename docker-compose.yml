@@ -6,14 +6,6 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8211:8211/udp"
-      - "8212:8212"
-      - "25575:25575"
     volumes:
       - /home/palworld/save:/home/steam/.steam/steam/steamapps/common/PalServer/Pal/Saved/SaveGames/0/
     restart: unless-stopped
-    healthcheck:
-      test: ["CMD-SHELL", "curl -L -X GET http://51.83.79.81:8212/v1/api/info -H 'Accept: application/json'"]
-      interval: 1m30s
-      timeout: 30s
-      retries: 5
-      start_period: 30s
