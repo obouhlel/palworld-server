@@ -53,6 +53,8 @@ RUN steamcmd +login anonymous +app_update 2394010 validate +quit
 
 RUN chown -R $USER:$USER $HOME
 
+RUN sh -c 'cd /home/steam/.steam/steam/steamapps/common/PalServer && ./PalServer.sh & sleep 10 && kill $!'
+
 COPY PalWorldSettings.ini /home/steam/.steam/steam/steamapps/common/PalServer/Pal/Saved/Config/LinuxServer/PalWorldSettings.ini
 
 USER $USER
