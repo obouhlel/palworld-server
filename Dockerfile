@@ -63,4 +63,5 @@ USER $USER
 WORKDIR /home/steam/.steam/steam/steamapps/common/PalServer
 
 # Set default command
-ENTRYPOINT ["sh ./PalServer.sh"]
+ENTRYPOINT ["sh"]
+CMD ["PalServer.sh"]
