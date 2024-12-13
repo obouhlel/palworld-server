@@ -62,6 +62,8 @@ USER $USER
 
 WORKDIR /home/steam/.steam/steam/steamapps/common/PalServer
 
+EXPOSE 8211/udp
+
 # Set default command
 ENTRYPOINT ["sh"]
 CMD ["PalServer.sh"]
