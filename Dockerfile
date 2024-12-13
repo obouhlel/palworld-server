@@ -48,18 +48,19 @@ RUN mkdir -p $HOME/.steam \
  && ln -s $HOME/.steam/sdk32/steamclient.so $HOME/.steam/sdk32/steamservice.so \
  && ln -s $HOME/.steam/sdk64/steamclient.so $HOME/.steam/sdk64/steamservice.so
 
+# Install PalWorld
+RUN steamcmd +login anonymous +app_update 2394010 validate +quit
+
 # Set permissions
 RUN chown -R $USER:$USER $HOME
 
-COPY entrypoint.sh $HOME/entrypoint.sh
-RUN chmod +x $HOME/entrypoint.sh
-
-COPY PalWorldSettings.ini $HOME/PalWorldSettings.ini
+# Copy the configuration files
+COPY PalWorldSettings.ini /home/steam/.steam/steam/steamapps/common/PalServer/Pal/Saved/Config/LinuxServer/PalWorldSettings.ini
 
 # Switch to the new user
 USER $USER
 
-WORKDIR $HOME
+WORKDIR /home/steam/.steam/steam/steamapps/common/PalServer
 
 # Set default command
-ENTRYPOINT ["./entrypoint.sh"]
+ENTRYPOINT ["sh ./PalServer.sh"]
