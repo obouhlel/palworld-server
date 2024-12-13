@@ -7,5 +7,5 @@ services:
     ports:
       - "8211:8211/udp"
     volumes:
-      - /home/palworld/save:/home/steam/.steam/steam/steamapps/common/PalServer/Pal/Saved/SaveGames/0/
+      - PalWorldSettings.ini:/home/steam/.steam/steam/steamapps/common/PalServer/Pal/Saved/Config/LinuxServer/PalWorldSettings.ini
     restart: unless-stopped
