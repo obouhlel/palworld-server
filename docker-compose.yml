@@ -9,3 +9,7 @@ services:
     volumes:
       - PalWorldSettings.ini:/home/steam/.steam/steam/steamapps/common/PalServer/Pal/Saved/Config/LinuxServer/PalWorldSettings.ini
     restart: unless-stopped
+    
+  volumes:
+    PalWorldSettings.ini:
+      driver: local
