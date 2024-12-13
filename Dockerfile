@@ -60,5 +60,9 @@ WORKDIR /home/steam/.steam/steam/steamapps/common/PalServer
 
 EXPOSE 8211/udp
 
+EXPOSE 8212/tcp
+
+EXPOSE 25575/tcp
+
 ENTRYPOINT ["sh"]
 CMD ["PalServer.sh", "-publiclobby"]
