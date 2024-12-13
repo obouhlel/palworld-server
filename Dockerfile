@@ -54,6 +54,8 @@ RUN chown -R $USER:$USER $HOME
 COPY entrypoint.sh $HOME/entrypoint.sh
 RUN chmod +x $HOME/entrypoint.sh
 
+COPY PalWorldSettings.ini $HOME/PalWorldSettings.ini
+
 # Switch to the new user
 USER $USER
 
