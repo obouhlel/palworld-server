@@ -61,5 +61,5 @@ WORKDIR /home/steam/
 
 EXPOSE 8211/udp
 
-ENTRYPOINT ["sh", "./PalServer.sh"]
+ENTRYPOINT ["sh", "PalServer.sh"]
 CMD ["-players=4", "-publiclobby", "-logformat=text"]
