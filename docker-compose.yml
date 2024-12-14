@@ -7,3 +7,5 @@ services:
     ports:
       - "8211:8211/udp"
     restart: unless-stopped
+    volumes:
+      - /home/palworld:/home/steam/Pal

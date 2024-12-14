@@ -20,7 +20,7 @@ RUN echo steam steam/question select "I AGREE" | debconf-set-selections \
 
 # Update the repository and install SteamCMD
 ARG DEBIAN_FRONTEND=noninteractive
-COPY sources.list /etc/apt/sources.list
+COPY config/sources.list /etc/apt/sources.list
 RUN dpkg --add-architecture i386 \
  && apt-get update -y \
  && apt-get upgrade -y \
@@ -49,19 +49,17 @@ RUN mkdir -p $HOME/.steam \
 ######## PALWORLD ########
 
 # Install PalWorld
-RUN steamcmd +login anonymous +app_update 2394010 validate +quit
+RUN steamcmd +force_install_dir /home/steam +login anonymous +app_update 2394010 validate +quit
+
+COPY config/PalWorldSettings.ini $HOME/PalWorldSettings.ini
 
 RUN chown -R $USER:$USER $HOME
 
-RUN sh -c 'cd /home/steam/.steam/steam/steamapps/common/PalServer && ./PalServer.sh & sleep 10 && kill $!'
-
-COPY PalWorldSettings.ini /home/steam/.steam/steam/steamapps/common/PalServer/Pal/Saved/Config/LinuxServer/PalWorldSettings.ini
-
 USER $USER
 
-WORKDIR /home/steam/.steam/steam/steamapps/common/PalServer
+WORKDIR /home/steam/
 
 EXPOSE 8211/udp
 
-ENTRYPOINT ["sh"]
-CMD ["PalServer.sh"]
+ENTRYPOINT ["sh", "./PalServer.sh"]
+CMD ["-players=4", "-publiclobby", "-logformat=text"]
