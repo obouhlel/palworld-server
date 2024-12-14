@@ -52,7 +52,7 @@ RUN mkdir -p $HOME/.steam \
 # Install PalWorld
 RUN steamcmd +force_install_dir /home/steam +login anonymous +app_update 2394010 validate +quit
 
-COPY config/PalWorldSettings.ini $HOME/PalWorldSettings.ini
+COPY config/PalWorldSettings.ini /home/steam/Pal/Saved/Config/LinuxServer/PalWorldSettings.ini
 
 RUN chown -R $USER:$USER $HOME
 
