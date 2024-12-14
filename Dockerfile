@@ -24,6 +24,7 @@ COPY config/sources.list /etc/apt/sources.list
 RUN dpkg --add-architecture i386 \
  && apt-get update -y \
  && apt-get upgrade -y \
+ && apt-get install -y vim \
  && apt-get install -y --no-install-recommends ca-certificates locales steamcmd \
  && rm -rf /var/lib/apt/lists/*
 
