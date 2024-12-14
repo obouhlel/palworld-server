@@ -6,4 +6,11 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8211:8211/udp"
+      - "8212:8212/tcp"
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8212/v1/api/info", "-H", "Accept: application/json", "-H", "Authorization: Basic T3VzdG9waWU6MTIzQWRtaW4h"]
+      interval: 1m30s
+      timeout: 30s
+      retries: 5
+      start_period: 30s
