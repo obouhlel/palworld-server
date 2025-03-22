@@ -66,7 +66,7 @@ Les données de sauvegarde du jeu sont stockées dans le volume Docker `palworld
 
 Une API REST est activée sur le port 8212. Vous pouvez accéder aux informations du serveur via:
 
-```
+```link
 http://<ip-du-serveur>:8212/v1/api/info
 ```
 
